@@ -25,8 +25,8 @@ Compile and execute:
 Because of the signal interruption being intercepted, we don't have a core dump and we don't have a dmesg log. As we have the source code, it is easy to momentarily disable the signal interception to visualize the instruction pointer (EIP cpu register) at the time of the segmentation fault. We will use a command-line editor called vim (Feel free to use `nano` if you are not comfortable with `vim`). If you are stuck in vim, you can quit at any time by typing `<ESC>qa!`.
 
 1. open the source file in vim: `vim ./vuln.c`{{execute}}
-2. show the line numbers by typing `<ESC>:set nu`
-3. go to line 26 by typing `26gg`
+2. show the line numbers by typing `<ESC>:set nu<ENTER>`
+3. go to line 27 by typing `27gg`
 4. change to INSERT mode with `I`
 5. comment the line by typing `//` at the beginning of the line
 6. save and quit with: `<ESC>ZZ`

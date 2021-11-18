@@ -39,7 +39,7 @@ Let's modify the size of the buffer to 2048. We will use a command-line editor c
 
 Recompile:
 
-`gcc -m32 -O0 -fno-stack-protector -no-pie -z execstack  -o say say.c`{{execute}}
+`gcc -m32 -O0 -fno-stack-protector -no-pie -z execstack  -o vuln vuln.c`{{execute}}
 
 ## generate a large payload 
 

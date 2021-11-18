@@ -8,9 +8,9 @@ For the sake of simplicity, we will focus on 32 bits architecture, so we need a 
 
 `dpkg --add-architecture i386`{{execute}}
 
-It is good practice to update your environment before installing new packages. Also worth to notice that the command-line manual is not available by default on ubuntu, so we want to `unminimize` before installing anything:
+It is good practice to update your environment before installing new packages. We will skip this step for the sake of time as it will take few precious minutes to install upgrades; however, should we meet any build issue during this scenario, then will have to rebuild with:
 
-`apt update -y && yes | unminimize apt upgrade -y`{{execute}}
+`apt update -y && yes | unminimize apt upgrade -y`
 
 Now, it is a good time to build a fresh compilation toolchain for both 64 and 32 bits architecture:
 
