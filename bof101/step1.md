@@ -1,4 +1,4 @@
-# How to build your environment
+# How to build your compiling environment
 
 We can see that our current architecture is 64 bits by running the below command:
 
@@ -15,3 +15,5 @@ It is good practice to update your environment before installing new packages. A
 Now, it is a good time to build a fresh compilation toolchain for both 64 and 32 bits architecture:
 
 `apt install -y --fix-missing man man-db sudo build-essential gdb gdb-multiarch libc6-dbg libc6-dbg:i386 make gcc-multilib g++-multilib nasm ltrace strace\n\n`{{execute}}
+
+Now let's move on to the next step to "Build your first C program"
