@@ -3,37 +3,31 @@
 #include <string.h>
 #include <signal.h>
 
-#define FLAGSIZE_MAX 64
-
-char flag[FLAGSIZE_MAX];
-
 void sigsegv_handler(int sig) {
-  fprintf(stderr, "%s\n", flag);
+  char * msg = "I will be printed only when a Segmentation Fault occures";
+  fprintf(stderr, "%s\n", msg);
   fflush(stderr);
   exit(1);
 }
 
-void vuln(char *input){
-  char buf[16];
+void say(char *input){
+  char buf[2048];
   strcpy(buf, input);
+  printf("%s\n", buf); 
+}
+
+void secretHiddenFunction(){
+  char * superSecretPassword = "ch4%6jjqw^&$h";
+  printf("This function is never called, so it is safe to hardcode this password: %s\n", superSecretPassword);
+  exit(1);
 }
 
 int main(int argc, char **argv){
   
-  FILE *f = fopen("flag.txt","r");
-  if (f == NULL) {
-    printf("Flag File is Missing. Problem is Misconfigured, please contact an Admin if you are running this on the shell server.\n");
-    exit(0);
-  }
-  fgets(flag,FLAGSIZE_MAX,f);
-  signal(SIGSEGV, sigsegv_handler);
-  
-  gid_t gid = getegid();
-  setresgid(gid, gid, gid);
+  //signal(SIGSEGV, sigsegv_handler);
   
   if (argc > 1) {
-    vuln(argv[1]);
-    printf("Thanks! Received: %s", argv[1]);
+    say(argv[1]);
   }
   else
     printf("This program takes 1 argument.\n");
