@@ -11,7 +11,7 @@ void sigsegv_handler(int sig) {
 }
 
 void say(char *input){
-  char buf[2048];
+  char buf[16];
   strcpy(buf, input);
   printf("%s\n", buf); 
 }
@@ -24,7 +24,7 @@ void secretHiddenFunction(){
 
 int main(int argc, char **argv){
   
-  //signal(SIGSEGV, sigsegv_handler);
+  signal(SIGSEGV, sigsegv_handler);
   
   if (argc > 1) {
     say(argv[1]);
