@@ -3,7 +3,7 @@
 #include <string.h>
 
 void say(char *input){
-  char buf[2048];
+  char buf[16];
   strcpy(buf, input);
   printf("%s\n", buf);
 }

