@@ -1,16 +1,17 @@
 # What if the programme does not have arguments
 
-Well, it is up to the exploit developer to Fuzz anything that can receive data. It could be:
+Well, it is up to the exploit developer to Fuzz everything that can receive data. It could be:
 - any programme argument
 - a command prompt where the programme ask the user for his input
 - a data stream, such as a network socket exposed on a certain port
+- an http API or a websocket
 - a text field in a graphical interface or a web form
-- an AI input (why not?):
+- an AI input (why not?): voice, image, video
 - an image (whichever the format) or any kind of media (audio, video format ...)
 
 ## gets is the most vulnerable C-function to Buffer Overflow
 
-Let's explore another vulnerable function:
+Let's explore another vulnerable function with a command prompt input instead of an argument:
 
 `cd ../buffer-overflow-1 && cat ./vuln.c`{{execute}}
 
