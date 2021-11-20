@@ -38,8 +38,6 @@ The below will be very helpful, but are not required to complete this scenario:
 - bash101 - Basic bash command-lines
 - python101 - Basic python code proficiency
 
-This is for software developers with prior experience using Jenkins to deploy web applications.
-
 ## Table of Contents
 
 This scenario is part of a set of related scenarios.
