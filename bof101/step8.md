@@ -2,7 +2,7 @@
 
 Rather then guessing where the return address should be, we can open the binary with a decompiler or debugger and look at the assembly source code. 
 
-## Naming convention
+## Definitions
 
 Those are my personal definitions, and that's all you need to know to starts with. When you get more advanced, I will certainly elaborate further on the definitions:
 
@@ -32,12 +32,12 @@ We can see the assembly code looks different. This is out of scope of the learni
 ## Quick code overview
 
 The say function starts with a `prolog` which aims to:
-1. save the location of the caller (main function) base pointer: I call it personnally old-ebp
+1. save the location of the caller (main function) base pointer: I call it personnally old-ebp or caller-ebp
 2. prepare a new stack frame for the callee (say function)
 
 ```asm
-push   ebp	; The current value of the ebp register (size 4 bytes) is pushed in the stack
-mov    ebp,esp  ; Then the ebp register takes the address at the top of the stack (esp) and become the callee-ebp
+push   ebp	; save caller-ebp (4 bytes) in the stack
+mov    ebp,esp  ; a new stackframe is created, ebp becomes the callee-ebp
 ```
 
 Right after the prolog, we can see two interesting instructions:

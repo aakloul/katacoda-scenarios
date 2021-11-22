@@ -1,4 +1,4 @@
-# What if the programme does not have arguments
+# What else can I fuzz to detect buffer overflow?
 
 Well, it is up to the exploit developer to Fuzz everything that can receive data. It could be:
 - any programme argument
@@ -6,8 +6,8 @@ Well, it is up to the exploit developer to Fuzz everything that can receive data
 - a data stream, such as a network socket exposed on a certain port
 - an http API or a websocket
 - a text field in a graphical interface or a web form
-- an AI input (why not?): voice, image, video
 - an image (whichever the format) or any kind of media (audio, video format ...)
+- an AI input (why not?)
 
 ## gets is the most vulnerable C-function to Buffer Overflow
 
