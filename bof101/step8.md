@@ -10,6 +10,7 @@ Those are my personal definitions, and that's all you need to know to starts wit
 - `caller`: a function that call another function
 - `callee`: a function which is called by another function
 - `stack frame`: a region in the stack aimed to store and retrieve data for a specific function 
+- `Instruction Pointer` (IP) is a register pointing to the next instruction to execute
 
 In our vulnerable code, we had the main function calling the say function, and therefore:
 - main is the caller
@@ -36,8 +37,8 @@ The say function starts with a `prolog` which aims to:
 2. prepare a new stack frame for the callee (say function)
 
 ```asm
-push   ebp	; save caller-ebp (4 bytes) in the stack
-mov    ebp,esp  ; a new stackframe is created, ebp becomes the callee-ebp
+push   ebp      ; save caller-ebp (4 bytes) in the stack
+mov    ebp,esp  ; new stackframe, ebp becomes callee-ebp
 ```
 
 Right after the prolog, we can see two interesting instructions:
@@ -65,8 +66,10 @@ Let's skip everything and jump to the three last instructions, it is called an `
 ```asm
 mov    ebx,DWORD PTR [ebp-0x4]	; Restore the caller-ebp
 leave  
-ret				; Restore the Instruction pointer to resume with caller next instruction
+ret				; Restore IP to resume caller next instruction
 ```
+
+We can now `quit`{{execute}} gdb and study a bit the stack frame.
 
 ## How does a stack frame looks like?
 

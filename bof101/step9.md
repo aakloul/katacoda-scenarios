@@ -23,11 +23,11 @@ Then execute without argument: `./vun`{{execute}}. Type anything below the Buffe
 
 It is possible to use the `echo` command to pass your input to this programme:
 
-`echo "This is a test" | ./vunl`{{execute}}
+`echo "This is a test" | ./vuln`{{execute}}
 
 Which make it easy to use python again:
 
-`echo $(python -c "print('A'*64)") | ./vunl`{{execute}}
+`echo $(python -c "print('A'*64)") | ./vuln`{{execute}}
 
 Now that we get our segmentation fault, how about you craft your own exploit?
 

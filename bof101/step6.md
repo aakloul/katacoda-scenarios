@@ -47,7 +47,7 @@ The output of `dmesg | tail -2`{{execute}} shows that the ip is overwritten with
 
 We want to execute the `secretHiddenFunction`, so what we need is to have the instruction pointer points to the beginning of this function. That's where comes the symbols table which tie objects addresses with labels. Can you guess what is the default label for our secretHiddenFunction?
 
-We can use `readelf -s ./vuln | grep secretHiddenFunction`{{execute}} or `objdump -t ./vuln | grep secretHiddenFunction`{{execute}} to identify the corresponding address 080492ee (hexadecimal number). I will explain later what is the endianess, so for now just consider that because of endianess, we have to represent address bytes in reverse order and therefore the 32 bits address representing the secretHiddenFunction should be written in C or in python: `\xee\x92\x04\x08`.
+We can use `readelf -s ./vuln | grep secretHiddenFunction`{{execute}} or `objdump -t ./vuln | grep secretHiddenFunction`{{execute}} to identify the corresponding address 080492ee (hexadecimal number). I will explain later what is the endianess, so for now just consider that because of endianess, we have to represent address bytes in reverse order and therefore the 32 bits address representing the secretHiddenFunction should be written in C or in python: `\xce\x92\x04\x08`.
 
 If we modify the source code, by adding or removing instructions, it is very likely that the symbols address get shifted. As an example, We can remove the comments before the signal function, then recompile, and we will observe the symbols address is changed:
 
@@ -56,7 +56,6 @@ If we modify the source code, by adding or removing instructions, it is very lik
 1. Uncomment row 27 of the ./vuln.c file
   - open the file with `vim ./vuln.c`
   - go to row 27
-  - go to the beginning of the line with `0`
   - delete the `//` (comment sign) with `xx`
   - write the changes and quit vim
 2. Recompile the programme
@@ -64,7 +63,7 @@ If we modify the source code, by adding or removing instructions, it is very lik
 
 ## What's next?
 
-Our shell prompt does not permit to type non alphanumeric characters such as \xee, \x92, \x04 and \x08
+Our shell prompt does not permit to type non alphanumeric characters such as \xce, \xee, \x92, \x04 and \x08
 
 That's the moment to introduce python (or perl or ruby)
 

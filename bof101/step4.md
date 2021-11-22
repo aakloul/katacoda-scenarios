@@ -53,7 +53,7 @@ Remember the value of the `ip` when we have executed: `./say "hello how are you 
 | | | |
 | --- | --- | --- |
 | 72 | 66 | 20 | 72 |
-| r | f | <space> | r | 
+| r | f | space | r | 
 
 If we reverse the order of those four ASCII characters, we find the sequence `r fr` which has a match in our argument: "hello how are you super dupe`r fr`iend:
 - Let's count how many character before our sequence: `echo "hello how are you super dupe" | wc -c`{{execute}}, will call this number OFFSET
