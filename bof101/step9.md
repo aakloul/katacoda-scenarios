@@ -15,11 +15,11 @@ Let's explore another vulnerable function with a command prompt input instead of
 
 `cd ../buffer-overflow-1 && cat ./vuln.c`{{execute}}
 
-At compilation time, you get a high chance to have a warning message because you are using a dangerous C-function `gets`. This function prompt the user for a keyboard input and will copy whatever the user type in a buffer without verifying the size of the buffer. The weakness of this function design is it cannot know in advance how many characters you will type in. You can have more details in the manual: `man gets`{{execute}}
+At compilation time, you get a high chance to have a warning message because you are using a dangerous C-function `gets`. This function prompt the user for a keyboard input and will copy whatever the user type in a buffer without verifying the size of the buffer. The weakness of this function design is it cannot know in advance how many characters you will type in. You can have more details in the manual: `man gets`{{execute}} (lick on the terminal and press `q`{{execute}} to quit)
 
 `gcc -m32 -O0 -fno-stack-protector -no-pie -z execstack  -o vuln vuln.c`{{execute}}
 
-Then execute without argument: `./vun`{{execute}}. Type anything below the Buffer size, and it will be echoed back to you.
+Then execute without argument: `./vuln`{{execute}}. Type anything below the Buffer size, and it will be echoed back to you.
 
 It is possible to use the `echo` command to pass your input to this programme:
 

