@@ -31,13 +31,15 @@ Look at this local exploit code: `cat local-exploit.py`{{execute}}
 - The CRAFT A PAYLOAD section should not cause you any trouble if you have followed previous steps with attention
 - Which leaves us with PAYLOAD DELIVERY on a local environment:
   - the `os.system()` will ask the operating system to execute whatever is in the parenthesis
-  - 
+  - `"echo %s | ./vuln" % payload`: the python interpreter will replace the `%s` sign with the value of the crafted payload
 
+To execute the exploit, run `python local-exploit.py`{{execute}}
+
+Once you are successful with the local exploit, you can adapt it to make a network exploit on localhost
 
 ## Expose your vulnerable programme over the Network
 
-To simulate Network Buffer Overflow, we will use a small utility called `socat`. 
-Without digging into details, the below will redirect all inputs and outputs of the executed programme to a socket exposed on port 1337:
+To simulate a Network Buffer Overflow on localhost, we will use a small utility called `socat`. Without digging into details, the below command  will redirect all inputs and outputs of the executed programme to a socket exposed on port 1337:
 
 `socat TCP-LISTEN:1337,nodelay,reuseaddr,fork EXEC:"stdbuf -i0 -o0 -e0 ./vuln"`{{execute}}
 
