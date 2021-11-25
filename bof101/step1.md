@@ -10,7 +10,7 @@ For the sake of simplicity, we will focus on 32 bits architecture, so we need a 
 
 It is good practice to update your environment before installing new packages. We will skip this step for the sake of time as it will take few precious minutes to install upgrades; however, should we meet any build issue during this scenario, then will have to rebuild with:
 
-`apt update -y && yes | unminimize apt upgrade -y`
+`apt update -y && apt upgrade -y`
 
 Now, it is a good time to build a fresh compilation toolchain for both 64 and 32 bits architecture:
 

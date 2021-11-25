@@ -35,10 +35,10 @@ Note that as opposed to nasm with gcc, all security features are enabled by defa
 
 | security feature | value | purpose |
 | --- | --- | --- |
-| RELRO | (No/Partial/Full) RELRO | |
-| STACK CANARY | (no) Canary found | |
-| NX | NX (en/dis)abled | |
-| PIE | No Pie | |
+| RELRO | (No/Partial/Full) RELRO | Relocation Read-Only |
+| STACK CANARY | (no) Canary found | detect smashed stack |
+| NX | NX (en/dis)abled | prevent stack from being executable |
+| PIE | No Pie | ASRL protection |
 
 For the purpose of learning and to make exploitation easier, we will recompile to disable all security features. Don't worry, we will progressively enable them one-by-one to showcase their importance and limitations, as well as how it can be by-passed by hackers. To recompile without gcc security flags:
 
