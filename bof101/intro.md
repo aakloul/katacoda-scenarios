@@ -14,9 +14,11 @@ This scenario covers and teaches:
 Technology and tools used:
 
 - ubuntu (linux distribution for beginner)
-- vim or nano as an editor
+- vim or nano (terminal editors)
 - gcc (GNU compiler)
 - nasm (Assembly compiler)
+- netcat and socat (network utilities)
+- python2 (interpreted language)
 
 ## Learning Objective
 

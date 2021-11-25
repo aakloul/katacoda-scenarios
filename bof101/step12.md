@@ -19,18 +19,34 @@ To execute the exploit, run `python local-exploit.py`{{execute}}
 
 Once you are successful with the local exploit, you can adapt it to make a network exploit on localhost
 
+## Utilize netcat to pipe your payload over the network
+
+The first things that comes in mind, is to keep the payload and simply change the PAYLOAD DELIVERY
+
+| | |
+| --- | --- |
+| local  | `"echo %s | ./vuln" % payload` |
+| remote | `"echo %s | nc localhost 1337" % payload` |
+
+Look at this netcat exploit code: `cat netcat-exploit.py`{{execute}}
+
+To execute our exploit, we simply execute `python netcat-exploit.py`{{execute}}
+
+Congratulations! You have written your first remote python exploit that automates the buffer-overflow exploitation in a reproducible manner
+
 ## Utilize python socket to replace netcat utility
 
-Have a look a the remote exploit source code:
+Have a look at the remote exploit source code:
 
-`cat remote-exploit.py`{{execute}}
+`cat socket-exploit.py`{{execute}}
 
 - Two modules are imported: struct and socket. 
 - The CRAFT A PAYLOAD section is almost the same as the local exploit
-- The only difference is the '\n' added at the end of the payload (we did not need it on the local exploit because it was implicitly added by the `echo` command
+- The only difference is the '\n' added at the end of the payload (we did not need it on the previous exploits because it was implicitly added by the `echo` command)
 - Which leaves us to walk-through the last section PAYLOAD DELIVERY: read the comments carefully, there is nothing else to add
 
-To execute our exploit, we simply execute `python remote-exploit.py`{{execute}}
+To execute our exploit, we simply execute `python socket-exploit.py`{{execute}}
 
-Congratulations! You have written a self-sufficient python exploit that automates the buffer-overflow exploitation in a reproducible manner
+Congratulations! You have written a 100% python remote exploit 
+
 
